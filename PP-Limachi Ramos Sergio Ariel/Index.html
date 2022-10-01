@@ -124,7 +124,7 @@
             this.edad= parseInt(edad);
         }
         toString(){
-            return "";
+            return this.id+","+this.nombre+","+this.apellido+","+this.edad;
         }
         toStringRow(){
             return '<td class="id">'+this.id+'</td><td class="nombre">'+this.nombre+'</td><td class="apellido">'+this.apellido+'</td><td class="edad">'+this.edad+'</td>';
@@ -141,7 +141,7 @@
             this.publicado=parseInt(publicado);
         }
         toString(){
-            return "";
+            return super.toString()+","+this.alterEgo+","+this.ciudad+","+this.publicado;
         }
         toStringRow(){
             return '<tr>'+super.toStringRow()+'<td class="alterEgo">'+this.alterEgo+'</td><td class="ciudad">'+this.ciudad+'</td><td class="publicado">'+this.publicado+'</td><td class="enemigo">N/A</td><td class="robos">N/A</td><td class="asesinatos">N/A</td> </tr>';
@@ -158,14 +158,13 @@
             this.asesinatos=parseInt(asesinatos);
         }
         toString(){
-            return ''+super.toString()+'<td class="altMax">N/A</td><td class="autonomia">N/A</td><td class="cantPue">'+this._cantidadPuertas+'</td><td class=" cantRue">'+this._cantidadRuedas+'</td>';
+            return ''+super.toString()+","+this.enemigo+","+this.robos+","+this.asesinatos
         }
         toStringRow(){
             return '<tr>'+super.toStringRow()+'<td class="alterEgo">'+'N/A'+'</td><td class="ciudad">'+'N/A'+'</td><td class="publicado">'+'N/A'+'</td><td class="enemigo">'+this.enemigo+'</td><td class="ciudad">'+this.robos+'</td><td class="asesinatos">'+this.asesinatos+'</td> </tr>';
         }
     }
     const datos=JSON.parse('[{"id":1, "nombre":"Clark", "apellido":"Kent", "edad":45, "alterego":"Superman", "ciudad":"Metropolis","publicado":2002},{"id":2, "nombre":"Bruce", "apellido":"Wayne", "edad":35, "alterego":"Batman", "ciudad":"Gotica","publicado":20012},{"id":3, "nombre":"Bart", "apellido":"Alen", "edad":30, "alterego":"Flash", "ciudad":"Central","publicado":2017},{"id":4, "nombre":"Lex", "apellido":"Luthor", "edad":18, "enemigo":"Superman", "robos":500,"asesinatos":7},{"id":5, "nombre":"Harvey", "apellido":"Dent", "edad":20, "enemigo":"Batman", "robos":750,"asesinatos":2},{"id":666, "nombre":"Celina", "apellido":"kyle", "edad":23, "enemigo":"Batman", "robos":25,"asesinatos":1}]');
-    console.log(datos);
 
     let datosCargados=new Array();
     for(let i=0;i<datos.length;i++){
@@ -178,7 +177,8 @@
             datosCargados.push(nuevo);
         }
     }
-    console.log(datosCargados);
+    mostrarPersonasxConsola();
+
 
 const tabla=document.getElementById('miTabla');
 function CargarHeroes(){
@@ -210,6 +210,7 @@ function limpiarTabla(){
 CargarTodo();
 
 function CargarSegunSeleccionActual(){
+    mostrarPersonasxConsola();
    if(filtro.options[filtro.selectedIndex].value=='Heroes'){
         limpiarTabla();
         CargarHeroes();
@@ -803,7 +804,9 @@ document.getElementById("OAsesinatos").addEventListener('click',()=>{
     CargarSegunSeleccionActual();
     
 });
-encontrarUtimoId();
+function mostrarPersonasxConsola(){
+    datosCargados.map(r=>console.log(r.toString()));
+}
 
 
 
