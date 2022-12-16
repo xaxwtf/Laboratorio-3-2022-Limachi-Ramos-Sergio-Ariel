@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SP</title>
+    <title>RSP</title>
 </head>
 <body>
     <main>
@@ -36,13 +36,13 @@
                     <table id="miTabla">
                     <thead>
                         <th class="id" id=""> ID </th>
-                        <th class="modelo" id=""> modelo </th>
-                        <th class="anoFabricacion" id=""> Año anoFabricacion </th>
-                        <th class="velMax" id=""> Velocidad Maxima </th>
-                        <th class="altMax" id=""> Altura Maxima </th>
-                        <th class="autonomia" id=""> Autonomia </th>
-                        <th class="cantPue" id=""> Cant. Puertas </th>
-                        <th class="cantRue" id=""> Cant. Ruedas </th>
+                        <th class="nombre" id=""> nombre </th>
+                        <th class="apellido" id=""> apellido </th>
+                        <th class="edad" id=""> Edad </th>
+                        <th class="sueldo" id=""> Sueldo </th>
+                        <th class="ventas" id=""> Ventas </th>
+                        <th class="compras" id=""> Compras </th>
+                        <th class="telefono" id=""> Telefono </th>
 
                     </thead>
                     </table>
@@ -53,16 +53,16 @@
                     <form action="" name="fAgregar" id="fAgregar"  enctype="multipart/form-data">
                         <p>ID:</p>
                         <input type="text" disabled name="id">
-                        <p>Modelo</p>
-                        <input type="text" name="modelo">
-                        <p>Año Fabricacion</p>
-                        <input type="text" name="anoFab">
-                        <p>Velocidad Maxima</p>
-                        <input type="text" name="velMax">
+                        <p>nombre</p>
+                        <input type="text" name="nombre">
+                        <p>Apellido</p>
+                        <input type="text" name="apellido">
+                        <p>Edad</p>
+                        <input type="text" name="edad">
                         <p> Tipo</p>
                         <select name="tipo" id="tipox" >
-                            <option value="Aereo">Aereo</option> 
-                            <option value="Terrestre">Terrestre</option> 
+                            <option value="Empleado">Empleado</option> 
+                            <option value="Cliente">Cliente</option> 
                         </select>
                     </form>
                     <section>
@@ -76,62 +76,62 @@
 
 
     <script>
-
-    class Vehiculo{
+   
+    class Persona{
         id;
-        modelo;
-        anoFab;
-        velMax;
-        constructor(id, modelo, anoFab, velMax){
+        nombre;
+        apellido;
+        edad;
+        constructor(id, nombre, apellido, edad){
             this.id=id;
-            this.modelo=modelo;
-            this.anoFab=anoFab;
-            this.velMax=velMax;
+            this.nombre=nombre;
+            this.apellido=apellido;
+            this.edad=edad;
         }
         toString(){
-            return '"modelo":"'+ this.modelo+'","anoFab":"'+this.anoFab+'","velMax":"'+this.velMax+'"';
+            return '"nombre":"'+ this.nombre+'","apellido":"'+this.apellido+'","edad":"'+this.edad+'"';
         }
         toStringRow(){
-            return '<td class="id">'+this.id+'</td><td class="modelo">'+this.modelo+'</td><td class="anoFab">'+this.anoFab+'</td><td class="velMax">'+this.velMax+'</td>';
+            return '<td class="id">'+this.id+'</td><td class="nombre">'+this.nombre+'</td><td class="apellido">'+this.apellido+'</td><td class="edad">'+this.edad+'</td>';
         }
-        toStringMod(){
-            return '"id":"'+ this.id+'","modelo":"'+ this.modelo+'","anoFab":"'+this.anoFab+'","velMax":'+this.velMax;
+        toJson(){
+            return '"id":"'+ this.id+'","nombre":"'+ this.nombre+'","apellido":"'+this.apellido+'","edad":'+this.edad;
         }
     }
-    class Aereo extends Vehiculo{
-        altMax;
-        autonomia;
-        constructor(id, modelo,anoFab, velMax , altMax, autonomia){
-            super(id,modelo,anoFab,velMax);
-            this.altMax=altMax;
-            this.autonomia=autonomia;
+    class Empleado extends Persona{
+        sueldo;
+        ventas;
+        constructor(id, nombre,apellido, edad , sueldo, ventas){
+            super(id,nombre,apellido,edad);
+            this.sueldo=sueldo;
+            this.ventas=ventas;
         }
         toString(){
-            return '{'+super.toString()+',"altMax":"'+ this.altMax+'","autonomia":"'+this.autonomia+'"}';
+            return '{'+super.toString()+',"sueldo":"'+ this.sueldo+'","ventas":"'+this.ventas+'"}';
         }
         toStringRow(){
-            return '<tr>'+super.toStringRow()+'<td class="altMax">'+this.altMax+'</td><td class="autonomia">'+this.autonomia+'</td> <td class="cantPue">N/A</td><td class="cantRue">N/A</td> <td> <button id="m'+this.id+'"> Modificiar </button> </td> <td> <button id="d'+this.id+'"> Eliminar</button> </td> </tr>';
+            return '<tr>'+super.toStringRow()+'<td class="sueldo">'+this.sueldo+'</td><td class="ventas">'+this.ventas+'</td> <td class="compras">N/A</td><td class="telefono">N/A</td> <td> <button id="m'+this.id+'"> Modificiar </button> </td> <td> <button id="d'+this.id+'"> Eliminar</button> </td> </tr>';
         }
-        toStringMod(){
-            return '{'+super.toStringMod()+',"altMax":'+ this.altMax+',"autonomia":'+this.autonomia+'}';
+        toJson(){
+            return '{'+super.toJson()+',"sueldo":'+ this.sueldo+',"ventas":'+this.ventas+'}';
         }
     }
-    class Terrestre extends Vehiculo{
-        cantPue;
-        cantRue;
-        constructor(id, modelo,anoFab, velMax , cantPue, cantRue){
-            super(id,modelo,anoFab,velMax);
-            this.cantPue=cantPue;
-            this.cantRue=cantRue;
+    class Cliente extends Persona{
+        compras;
+        telefono;
+        constructor(id, nombre,apellido, edad , compras, telefono){
+            super(id,nombre,apellido,edad);
+            this.compras=compras;
+            this.telefono=telefono;
         }
         toString(){
-            return '{'+super.toString()+',"cantPue":"'+ this.cantPue+'","cantRue":"'+this.cantRue+'"}'
+            return '{'+super.toString()+',"compras":"'+ this.compras+'","telefono":"'+this.telefono+'"}'
         }
         toStringRow(){
-            return '<tr>'+super.toStringRow()+'<td class="altMax">'+'N/A'+'</td><td class="autonomia">'+'N/A'+'</td> <td class="cantPue">'+this.cantPue+'</td><td class="cantRue">'+this.cantRue+'</td> <td> <button id="m'+this.id+'"> Modificiar </button> </td> <td> <button id="d'+this.id+'"> Eliminar</button> </td> </tr>';
+            return '<tr>'+super.toStringRow()+'<td class="sueldo">'+'N/A'+'</td><td class="ventas">'+'N/A'+'</td> <td class="compras">'+this.compras+'</td><td class="telefono">'+this.telefono+'</td> <td> <button id="m'+this.id+'"> Modificiar </button> </td> <td> <button id="d'+this.id+'"> Eliminar</button> </td> </tr>';
         }
-        toStringMod(){
-            return '{'+super.toStringMod()+',"cantPue":"'+ this.cantPue+'","cantRue":'+this.cantRue+'}'
+        toJson(){
+            return '{'+super.toJson()+',"compras":"'+ this.compras+'","telefono":'+this.telefono+'}'
         }
     }
     
@@ -158,6 +158,7 @@ document.querySelector('button#agregar').addEventListener('click',e=>{
     e.preventDefault();
     limpiarFormulario();
     OcultarUMostarFormulario();
+    ActivarIputs();
 });
 
 function CargarFormularioSegunTypo(){
@@ -179,20 +180,20 @@ function CargarFormularioSegunTypo(){
        
     }
     let filtro=document.querySelector('form select#tipox');
-    if(filtro.options[filtro.selectedIndex].value == "Aereo"){
-        input.name="altMax";
-        input.placeholder="Altura Maxima";
+    if(filtro.options[filtro.selectedIndex].value == "Empleado"){
+        input.name="sueldo";
+        input.placeholder="Sueldo";
         
-        input2.name= "autonomia";
-        input2.placeholder="Autonomia";
+        input2.name= "ventas";
+        input2.placeholder="Ventas";
 
     }
     else{
-        input.name="cantPue";
-        input.placeholder="Cant. Puertas";
+        input.name="compras";
+        input.placeholder="Compras";
         
-        input2.name= "cantRue";
-        input2.placeholder="Cant. Ruedas";
+        input2.name= "telefono";
+        input2.placeholder="Telefono";
     }
     myform.appendChild(input);
     myform.appendChild(input2);
@@ -203,34 +204,52 @@ document.querySelector('form select#tipox').addEventListener('change',CargarForm
 
 function Alta(){
     const myform=document.forms['fAgregar'];
-    let connexion= new XMLHttpRequest();
     let nuevo;
-    if(myform.tipo.options[myform.tipo.selectedIndex].value == "Aereo"){
-        nuevo=new Aereo(1,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.altMax.value,myform.autonomia.value);
+    if(myform.tipo.options[myform.tipo.selectedIndex].value == "Empleado"){
+        nuevo=new Empleado(1,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.sueldo.value,myform.ventas.value);
     }
     else{
-        nuevo=new Terrestre(1,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.cantPue.value,myform.cantRue.value)
+        nuevo=new Cliente(1,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.compras.value,myform.telefono.value)
     }
-        modoEsperaActivarDesactivar();
+    modoEsperaActivarDesactivar();
         
+    fetch('http://localhost/PersonasEmpleadosClientes.php', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body:nuevo.toString()
+    }).then( response =>{
+        if(response.ok) {
+            return response.json();
+            
+        } 
+    }).then(r=>{
+        
+        nuevo.id=r.id
+            datosCargados.push(nuevo);
+            limpiarTabla();
+            CargarTodo();
+            OcultarUMostarFormulario();
+            modoEsperaActivarDesactivar();
+    })  
+    
+}
+
+function cargarInfoConXml(){
+    let connexion= new XMLHttpRequest();
         connexion.onreadystatechange=function(){
             if(this.readyState==4 && this.status==200){
                 let aux=JSON.parse(this.responseText);
-                nuevo.id=aux.id;
-                datosCargados.push(nuevo);
-                limpiarTabla();
+                CargarDatosaDatos(aux);
                 CargarTodo();
-                OcultarUMostarFormulario();
-                modoEsperaActivarDesactivar();
-                
+                document.querySelector("div.Espera").style.display="none";
+                document.querySelector("#principal").style.display="flex";
             }
         }
-        
-        connexion.open("PUT","http://localhost/labo3/vehiculoAereoTerrestre.php");
+        connexion.open("GET","http://localhost/PersonasEmpleadosClientes.php");
         connexion.setRequestHeader('Content-type', 'application/json');
-        console.log(nuevo.toString());
-        connexion.send(nuevo.toString());
-    
+        connexion.send();
 }
 
 
@@ -239,51 +258,51 @@ document.getElementById('alta').addEventListener('click',(e)=>{
     let error=false;
 
     const myform=document.forms['fAgregar'];
-    if(myform.modelo.value=="") {
+    if(myform.nombre.value=="") {
             error=true;
-            myform.modelo.style.borderColor= 'red';
+            myform.nombre.style.borderColor= 'red';
     }else {
-        myform.modelo.style.borderColor= 'inherit';
+        myform.nombre.style.borderColor= 'inherit';
     }
-    if(myform.anoFab.value=="") {
+    if(myform.apellido.value=="") {
             error=true;
-            myform.anoFab.style.borderColor= 'red';
+            myform.apellido.style.borderColor= 'red';
     }else {
-        myform.anoFab.style.borderColor= 'inherit';
+        myform.apellido.style.borderColor= 'inherit';
     }
-    if(myform.velMax.value=="") {
+    if(myform.edad.value=="") {
             error=true;
-            edad.velMax.style.borderColor= 'red';
+            edad.edad.style.borderColor= 'red';
     }else {
-        myform.velMax.style.borderColor= 'inherit';
+        myform.edad.style.borderColor= 'inherit';
     }
-    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Aereo"){
-        if(myform.altMax.value=="") {
+    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Empleado"){
+        if(myform.sueldo.value=="") {
             error=true;
-            myform.altMax.style.borderColor= 'red';
+            myform.sueldo.style.borderColor= 'red';
         }else {
-            myform.altMax.style.borderColor= 'inherit';
+            myform.sueldo.style.borderColor= 'inherit';
         }
-        if(myform.autonomia.value=="") {
+        if(myform.ventas.value=="") {
             error=true;
-            myform.autonomia.style.borderColor= 'red';
+            myform.ventas.style.borderColor= 'red';
         }else {
-            myform.autonomia.style.borderColor= 'inherit';
+            myform.ventas.style.borderColor= 'inherit';
         }
         
     }
     else{
-        if(myform.cantPue.value=="") {
+        if(myform.compras.value=="") {
             error=true;
-            myform.cantPue.style.borderColor= 'red';
+            myform.compras.style.borderColor= 'red';
         }else {
-            myform.cantPue.style.borderColor= 'inherit';
+            myform.compras.style.borderColor= 'inherit';
         }
-        if(myform.cantRue.value=="") {
+        if(myform.telefono.value=="") {
             error=true;
-            myform.cantRue.style.borderColor= 'red';
+            myform.telefono.style.borderColor= 'red';
         }else {
-            myform.cantRue.style.borderColor= 'inherit';
+            myform.telefono.style.borderColor= 'inherit';
         }
         
     }
@@ -309,32 +328,32 @@ document.getElementById('alta').addEventListener('click',(e)=>{
 function limpiarFormulario(){
     const myform=document.forms['fAgregar'];
     myform.id.value="";
-    myform.modelo.value="";
-    myform.anoFab.value="";
-    myform.velMax.value="";
-    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Aereo"){
-        myform.altMax.value= "";
-        myform.autonomia.value="";
+    myform.nombre.value="";
+    myform.apellido.value="";
+    myform.edad.value="";
+    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Empleado"){
+        myform.sueldo.value= "";
+        myform.ventas.value="";
     }
     else{
-        myform.cantPue.value="";
-        myform.cantRue.value="";
+        myform.compras.value="";
+        myform.telefono.value="";
     }
 }
 
 function ActivarIputs(){
     const myform=document.forms['fAgregar'];
-    myform.modelo.disabled=false;
-    myform.anoFab.disabled=false;
-    myform.velMax.disabled=false;
+    myform.nombre.disabled=false;
+    myform.apellido.disabled=false;
+    myform.edad.disabled=false;
     myform.tipo.disabled=false;
-    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Aereo"){
-        myform.altMax.disabled= false;
-        myform.autonomia.disabled=false;
+    if(myform.tipo.options[myform.tipo.selectedIndex].value=="Empleado"){
+        myform.sueldo.disabled= false;
+        myform.ventas.disabled=false;
     }
     else{
-        myform.cantPue.disabled=false;
-        myform.cantRue.disabled=false;
+        myform.compras.disabled=false;
+        myform.telefono.disabled=false;
     }
 }
 
@@ -344,18 +363,18 @@ async function  saveChanges(){
     if(myform.id.value!=""){
         for(let i=0;i<datosCargados.length;i++){
             if(datosCargados[i].id==myform.id.value){
-                if(datosCargados[i] instanceof Aereo){
-                    mod=new Aereo(datosCargados[i].id,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.altMax.value,myform.autonomia.value);
+                if(datosCargados[i] instanceof Empleado){
+                    mod=new Empleado(datosCargados[i].id,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.sueldo.value,myform.ventas.value);
                 }
-                else if(datosCargados[i] instanceof Terrestre){
-                    mod=new Terrestre(datosCargados[i].id,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.cantPue.value,myform.cantRue.value);
+                else if(datosCargados[i] instanceof Cliente){
+                    mod=new Cliente(datosCargados[i].id,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.compras.value,myform.telefono.value);
                 }
                 console.log("CONSULTO!!");
-                console.log(mod.toStringMod());
+                console.log(mod.toJson());
                 modoEsperaActivarDesactivar();
-                fetch('http://localhost/labo3/vehiculoAereoTerrestre.php', {
+                fetch('http://localhost/PersonasEmpleadosClientes.php', {
                     method: 'POST',
-                    body:mod.toStringMod()
+                    body:mod.toJson()
                 }).then( async function(response){
                     if(response.ok) {
                         return true;
@@ -391,18 +410,18 @@ function  Delete(){
         for(let i=0;i<datosCargados.length;i++){
             if(datosCargados[i].id==myform.id.value){
                 console.log("INDICE "+ i);
-                if(datosCargados[i] instanceof Aereo){
-                    mod=new Aereo(datosCargados[i].id,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.altMax.value,myform.autonomia.value);
+                if(datosCargados[i] instanceof Empleado){
+                    mod=new Empleado(datosCargados[i].id,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.sueldo.value,myform.ventas.value);
                 }
-                else if(datosCargados[i] instanceof Terrestre){
-                    mod=new Terrestre(datosCargados[i].id,myform.modelo.value,myform.anoFab.value,myform.velMax.value,myform.cantPue.value,myform.cantRue.value);
+                else if(datosCargados[i] instanceof Cliente){
+                    mod=new Cliente(datosCargados[i].id,myform.nombre.value,myform.apellido.value,myform.edad.value,myform.compras.value,myform.telefono.value);
                 }
                 console.log("CONSULTO!!");
-                console.log(mod.toStringMod());
+                console.log(mod.toJson());
                 modoEsperaActivarDesactivar();
-                fetch('http://localhost/labo3/vehiculoAereoTerrestre.php', {
+                fetch('http://localhost/PersonasEmpleadosClientes.php', {
                     method: 'DELETE',
-                    body:mod.toStringMod()
+                    body:mod.toJson()
                 }).then( async function(response){
                     console.log(response);
                     if(response.ok) {
@@ -447,7 +466,7 @@ function addEventoModificar(idBoton){
         const myform=document.forms['fAgregar'];
         for(let i=0;i<datosCargados.length;i++){
             if(datosCargados[i].id==idBoton){
-                if(datosCargados[i] instanceof Aereo){
+                if(datosCargados[i] instanceof Empleado){
                     myform.tipo.selectedIndex=0;
                 }
                 else{
@@ -459,17 +478,17 @@ function addEventoModificar(idBoton){
                 OcultarUMostarFormulario();
                 
                 myform.id.value=datosCargados[i].id;
-                myform.modelo.value=datosCargados[i].modelo;
-                myform.anoFab.value=datosCargados[i].anoFab;
-                myform.velMax.value=datosCargados[i].velMax;
-                if(myform.tipo.options[myform.tipo.selectedIndex].value=="Aereo"){
-                myform.altMax.value=datosCargados[i].altMax;
-                myform.autonomia.value=datosCargados[i].autonomia;
+                myform.nombre.value=datosCargados[i].nombre;
+                myform.apellido.value=datosCargados[i].apellido;
+                myform.edad.value=datosCargados[i].edad;
+                if(myform.tipo.options[myform.tipo.selectedIndex].value=="Empleado"){
+                myform.sueldo.value=datosCargados[i].sueldo;
+                myform.ventas.value=datosCargados[i].ventas;
                 
                 }
-                else if(myform.tipo.options[myform.tipo.selectedIndex].value=="Terrestre"){
-                    myform.cantPue.value=datosCargados[i].cantPue;
-                    myform.cantRue.value= datosCargados[i].cantRue;
+                else if(myform.tipo.options[myform.tipo.selectedIndex].value=="Cliente"){
+                    myform.compras.value=datosCargados[i].compras;
+                    myform.telefono.value= datosCargados[i].telefono;
                 }
                 const boton=document.querySelector('button#alta');
                 const desplegable=document.querySelector("section#desplegable");
@@ -493,7 +512,7 @@ function addEventoDelete(idBoton){
         const myform=document.forms['fAgregar'];
         for(let i=0;i<datosCargados.length;i++){
             if(datosCargados[i].id==idBoton){
-                if(datosCargados[i] instanceof Aereo){
+                if(datosCargados[i] instanceof Empleado){
                     myform.tipo.selectedIndex=0;
                 }
                 else{
@@ -505,24 +524,24 @@ function addEventoDelete(idBoton){
                 OcultarUMostarFormulario();
                 
                 myform.id.value=datosCargados[i].id;
-                myform.modelo.disabled=true;
-                myform.modelo.value=datosCargados[i].modelo;
-                myform.anoFab.disabled=true;
-                myform.anoFab.value=datosCargados[i].anoFab;
-                myform.velMax.disabled=true;
-                myform.velMax.value=datosCargados[i].velMax;
-                if(myform.tipo.options[myform.tipo.selectedIndex].value=="Aereo"){
-                    myform.altMax.disabled=true;
-                myform.altMax.value=datosCargados[i].altMax;
-                myform.autonomia.disabled=true;
-                myform.autonomia.value=datosCargados[i].autonomia;
+                myform.nombre.disabled=true;
+                myform.nombre.value=datosCargados[i].nombre;
+                myform.apellido.disabled=true;
+                myform.apellido.value=datosCargados[i].apellido;
+                myform.edad.disabled=true;
+                myform.edad.value=datosCargados[i].edad;
+                if(myform.tipo.options[myform.tipo.selectedIndex].value=="Empleado"){
+                    myform.sueldo.disabled=true;
+                myform.sueldo.value=datosCargados[i].sueldo;
+                myform.ventas.disabled=true;
+                myform.ventas.value=datosCargados[i].ventas;
                 
                 }
-                else if(myform.tipo.options[myform.tipo.selectedIndex].value=="Terrestre"){
-                    myform.cantPue.disabled=true;
-                    myform.cantPue.value=datosCargados[i].cantPue;
-                    myform.cantRue.disabled=true;
-                    myform.cantRue.value= datosCargados[i].cantRue;
+                else if(myform.tipo.options[myform.tipo.selectedIndex].value=="Cliente"){
+                    myform.compras.disabled=true;
+                    myform.compras.value=datosCargados[i].compras;
+                    myform.telefono.disabled=true;
+                    myform.telefono.value= datosCargados[i].telefono;
                 }
                 myform.tipo.disabled=true;
                 const boton=document.querySelector('button#alta');
@@ -563,7 +582,7 @@ function OcultarUMostarFormulario(){
 
 
 function cargarInfoConFech(){
-    fetch("http://localhost/labo3/vehiculoAereoTerrestre.php").then(r=>r.json()).then(r=>{
+    fetch("http://localhost/PersonasEmpleadosClientes.php").then(r=>r.json()).then(r=>{
         CargarDatosaDatos(r);
            CargarTodo();
            document.querySelector("div.Espera").style.display="none";
@@ -573,18 +592,19 @@ function cargarInfoConFech(){
 
 function CargarDatosaDatos(datos){
     for(let i=0;i<datos.length;i++){
-        if(datos[i].altMax!= undefined && datos[i].autonomia!=undefined){
-            let nuevo=new Aereo(datos[i].id, datos[i].modelo,datos[i].anoFab,datos[i].velMax, datos[i].altMax, datos[i].autonomia);
+        if(datos[i].sueldo!= undefined && datos[i].ventas!=undefined){
+            let nuevo=new Empleado(datos[i].id, datos[i].nombre,datos[i].apellido,datos[i].edad, datos[i].sueldo, datos[i].ventas);
             datosCargados.push(nuevo);
         }
-        else if(datos[i].cantPue!=undefined && datos[i].cantRue!=undefined){
-            let nuevo=new Terrestre(datos[i].id, datos[i].modelo,datos[i].anoFab,datos[i].velMax,datos[i].cantPue, datos[i].cantRue);
+        else if(datos[i].compras!=undefined && datos[i].telefono!=undefined){
+            let nuevo=new Cliente(datos[i].id, datos[i].nombre,datos[i].apellido,datos[i].edad,datos[i].compras, datos[i].telefono);
             datosCargados.push(nuevo);
         }
     }
 }
 
-cargarInfoConFech();
+//cargarInfoConFech();
+cargarInfoConXml();
 
 function modoEsperaActivarDesactivar(){
     if(document.querySelector("div.Espera").style.display=="flex"){
