@@ -220,7 +220,9 @@ function Alta(){
                 datosCargados.push(nuevo);
                 limpiarTabla();
                 CargarTodo();
+                OcultarUMostarFormulario();
                 modoEsperaActivarDesactivar();
+                
             }
         }
         
@@ -296,14 +298,14 @@ document.getElementById('alta').addEventListener('click',(e)=>{
     }
     else{
         if(!error){
-        Alta();
-        limpiarFormulario();
-        OcultarUMostarFormulario();
-    }
+            Alta();
+        }
     }
     
     
 });
+
+
 function limpiarFormulario(){
     const myform=document.forms['fAgregar'];
     myform.id.value="";
@@ -356,27 +358,26 @@ async function  saveChanges(){
                     body:mod.toStringMod()
                 }).then( async function(response){
                     if(response.ok) {
-                        return response.text();
+                        return true;
                     } else {
-                        throw "Error en la llamada Ajax";
+                        alert("error, no se puede modificar dicho elemento!");
+                        return false;
+                        //throw "Error en la llamada Ajax";
                     }
                 }).then(r=>{
-                    datosCargados[i]=mod;
-                        modoEsperaActivarDesactivar();
-                        limpiarTabla();
-                        CargarTodo();
-                        limpiarFormulario();
-                        OcultarUMostarFormulario();
-                        MostrarUOcultarPrincipal();
-                    console.log(r);
+                    if(r){
+                        datosCargados[i]=mod;
+                    }
+                    limpiarTabla();
+                    CargarTodo();
+                    limpiarFormulario();
+                    OcultarUMostarFormulario();
+                    modoEsperaActivarDesactivar();
 
                 }).catch(function(err) {
                     console.log(err);
                 });
-                
-               
-                        
-               
+                break;
             }
         }     
     }
@@ -403,19 +404,26 @@ function  Delete(){
                     method: 'DELETE',
                     body:mod.toStringMod()
                 }).then( async function(response){
+                    console.log(response);
                     if(response.ok) {
                         console.log("FUE OKEY");
                         datosCargados= datosCargados.filter(function(x) { return x.id !== mod.id });
                         ActivarIputs();
-                        modoEsperaActivarDesactivar();
+                        
                         limpiarTabla();
                         CargarTodo();
-                        MostrarUOcultarPrincipal();
                         limpiarFormulario();
                         OcultarUMostarFormulario();
+                        modoEsperaActivarDesactivar();
                         return response.text();
                     } else {
-                        throw "Error en la llamada Ajax";
+                        alert("error!, no se puede eliminar el elemento!");
+                        limpiarTabla();
+                        CargarTodo();
+                        limpiarFormulario();
+                        OcultarUMostarFormulario();
+                        modoEsperaActivarDesactivar();
+                        //throw "Error en la llamada Ajax";
                     }
                 }).catch(function(err) {
                     console.log(err);
@@ -579,13 +587,11 @@ function CargarDatosaDatos(datos){
 cargarInfoConFech();
 
 function modoEsperaActivarDesactivar(){
-    if(document.querySelector("div.Espera").style.display=="flex"&& document.querySelector("#principal").style.display=="none"){
+    if(document.querySelector("div.Espera").style.display=="flex"){
         document.querySelector("div.Espera").style.display="none";
-        document.querySelector("#principal").style.display="flex";
     }
     else{
         document.querySelector("div.Espera").style.display="flex";
-        document.querySelector("#principal").style.display="none";
     }
 }
 
